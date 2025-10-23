@@ -1,5 +1,5 @@
 import reflex as rx
-from dice_game_project.backend.player2_login_backend import LoginState
+from dice_game_project.backend.player2_login_backend import Player2LoginState
 
 # This is our Login Page. it shows 2 text box for entering username and password.
 # when user enters username and password , it sets the variables of Login State in backend class.
@@ -9,13 +9,13 @@ def player2_login_page() -> rx.Component:
     return rx.container(
         rx.color_mode.button(position="top-right"),
         rx.vstack(
-            rx.heading("Player 2 Login", size="9", margin_bottom="2rem"),
+            rx.heading("Player 1 Login", size="9", margin_bottom="2rem"),
             
             rx.vstack(
                 rx.text("Username", size="3", weight="bold"),
                 rx.input(
                     placeholder="Enter username",
-                    on_change=LoginState.set_username,
+                    on_change=Player2LoginState.set_username,
                     width="100%",
                     size="3"
                 ),
@@ -24,25 +24,25 @@ def player2_login_page() -> rx.Component:
                 rx.input(
                     placeholder="Enter password",
                     type="password",
-                    on_change=LoginState.set_password,
+                    on_change=Player2LoginState.set_password,
                     width="100%",
                     size="3"
                 ),
                 
                 rx.button(
                     "Submit",
-                    on_click=LoginState.login,
+                    on_click=Player2LoginState.login,
                     size="3",
                     margin_top="1.5rem",
                     width="100%"
                 ),
                 
                 rx.cond(
-                    LoginState.message != "",
+                    Player2LoginState.message != "",
                     rx.text(
-                        LoginState.message,
+                        Player2LoginState.message,
                         color=rx.cond(
-                            LoginState.login_success,
+                            Player2LoginState.login_success,
                             "green",
                             "red"
                         ),

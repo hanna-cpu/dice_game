@@ -14,7 +14,7 @@ from dice_game_project.backend.parent_state import ParentStateClass
 
 class ExportState(ParentStateClass):
 
-    username: str = ParentStateClass.player1_username
+    #username: str = ParentStateClass.player1_username
     message: str = ""
     save_success: bool = False
     artists: List[str] = []

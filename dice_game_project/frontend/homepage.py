@@ -6,9 +6,7 @@ from dice_game_project.frontend.headers import header_home
 
 def homepage_page() -> rx.Component:
     return rx.box(
-        header_home(),
-
-          
+        header_home(),        
         min_height="100vh",
         background="#f8f9fa"
     )

@@ -4,11 +4,13 @@ from dice_game_project.backend.parent_state import ParentStateClass
 # We create the headers as a function so it will be easy to call them and add them 
 # to different pages. 
 
+
 def header_home() -> rx.Component:
     """Main navigation header"""
     return rx.hstack(
         rx.heading("Dice Game", size="7", color="white"),
-        rx.text(f"Player 1: , {ParentStateClass.player2_username}", color="black", size="3"),
+        rx.text(f"Player 1: , {ParentStateClass.player1username}", color="black", size="3"),
+        rx.text(f"Player 2: , {ParentStateClass.player2username}", color="black", size="3"),
         rx.spacer(),
         rx.color_mode.button(),
         rx.spacer(),

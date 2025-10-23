@@ -5,7 +5,7 @@ from dice_game_project.backend.parent_state import ParentStateClass
 
 # The login state class is a child of our Parent State Class 
 
-class LoginState(ParentStateClass):
+class Player1LoginState(ParentStateClass):
     username: str = ""
     password: str = ""
     message: str = ""
@@ -34,7 +34,7 @@ class LoginState(ParentStateClass):
             self.message = f"Login successful! Welcome, {self.username}"
             self.login_success = True
             # Below line is very very important, as here we set the Username of Parent State Class. 
-            ParentStateClass.player1_username = self.username
+            self.player1username = self.username
             # And once the user and password is correct we redirect to HomePage
             return rx.redirect("/player2_login")
         else:

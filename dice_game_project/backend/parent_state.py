@@ -8,5 +8,7 @@ import reflex as rx
 
 
 class ParentStateClass(rx.State):
-    player1_username: str = "*(Player 1 You Are Not Logged In)*"
-    player2_username: str = "*(Player 2 You Are Not Logged In)*"
+    player1username: str = "*(Player 1 You Are Not Logged In)*"
+    player2username: str = "*(Player 2 You Are Not Logged In)*"
+    
+
