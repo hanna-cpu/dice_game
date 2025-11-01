@@ -10,9 +10,8 @@ from dice_game_project.frontend.player1_login_page import player1_login_page
 from dice_game_project.frontend.player2_login_page import player2_login_page
 from dice_game_project.frontend.register_page import register_page
 from dice_game_project.frontend.homepage import homepage_page
-from dice_game_project.frontend.export import export
-from dice_game_project.backend.export_backend import ExportState
 from dice_game_project.frontend.game_page import game_page 
+from dice_game_project.frontend.view_results_page import view_results_page
 
 ## This is our Landing Page. It is the default page that the program shows
 # it shows a welcome and 2 links to Login and Register. 
@@ -42,5 +41,5 @@ app.add_page(player1_login_page, route="/player1_login")
 app.add_page(player2_login_page, route="/player2_login")
 app.add_page(register_page, route="/register")
 app.add_page(homepage_page, route="/homepage")
-app.add_page(export, route="/export")
 app.add_page(game_page, route="/game_page")
+app.add_page(view_results_page, route="/view_results")

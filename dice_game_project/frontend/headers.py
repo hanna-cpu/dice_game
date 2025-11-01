@@ -29,8 +29,8 @@ def header_home() -> rx.Component:
 
 
             rx.link(
-                rx.button("Export", variant="ghost", color_scheme="gray", size="3"),
-                href="/export"
+                rx.button("View Highest Results", variant="ghost", color_scheme="gray", size="3"),
+                href="/view_results"
             ),
            
             spacing="4"

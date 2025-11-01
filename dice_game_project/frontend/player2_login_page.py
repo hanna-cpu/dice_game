@@ -9,7 +9,7 @@ def player2_login_page() -> rx.Component:
     return rx.container(
         rx.color_mode.button(position="top-right"),
         rx.vstack(
-            rx.heading("Player 1 Login", size="9", margin_bottom="2rem"),
+            rx.heading("Player 2 Login", size="9", margin_bottom="2rem"),
             
             rx.vstack(
                 rx.text("Username", size="3", weight="bold"),

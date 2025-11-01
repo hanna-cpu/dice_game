@@ -3,9 +3,16 @@ import random
 from typing import List
 from dice_game_project.backend.parent_state import ParentStateClass
 
+#this is how the game logic works
+#players take turns rolling two dice for 5 rounds
+#this score is calculated using specific rules
+#updates the scores and shows the winner at the end
+
 class GameState(ParentStateClass):
     # Game state variables
+    message: str = ""
     current_player: int = 1
+    current_player_name: str = "luna"
     round_number: int = 1
     dice1: int = 0
     dice2: int = 0
@@ -15,7 +22,8 @@ class GameState(ParentStateClass):
     winner_message: str = ""
     is_tiebreaker: bool = False
     roll_count: int = 0
-    
+
+
     @rx.var
     def player1_total(self) -> int:
         """Calculate Player 1's total score"""
@@ -28,6 +36,11 @@ class GameState(ParentStateClass):
     
     def roll_dice(self):
         """Handle dice rolling logic"""
+
+        if self.current_player_name == "luna":
+            self.current_player_name = self.player1username
+       
+
         if self.game_over:
             return
         
@@ -42,16 +55,19 @@ class GameState(ParentStateClass):
         # Even number: add 10 points
         if total % 2 == 0:
             score += 10
+            self.message = "Total is even, 10 points added"
         # Odd number: subtract 5 points
         else:
             score -= 5
+            self.message = "Total is odd, 5 points subtracted"
         
-        # Double: roll extra die
+        # Roll same number on both dice : roll extra die
         extra_points = 0
         if self.dice1 == self.dice2:
             extra_die = random.randint(1, 6)
             extra_points = extra_die
             score += extra_points
+            self.message += f"; Rolled the same numbers on each die, extra roll: {extra_die} points added"   
         
         # Score cannot go below 0
         score = max(0, score)
@@ -74,8 +90,10 @@ class GameState(ParentStateClass):
         # Switch turns or advance round
         if self.current_player == 1:
             self.current_player = 2
+            self.current_player_name = self.player2username
         else:
             self.current_player = 1
+            self.current_player_name = self.player1username
             if not self.is_tiebreaker:
                 if self.round_number < 5:
                     self.round_number += 1
@@ -90,12 +108,12 @@ class GameState(ParentStateClass):
         player2_total = sum(self.player2_scores)
         
         if player1_total > player2_total:
-            self.winner_message = f"Player 1 wins with {player1_total} points!"
-            self.save_winner("Player 1", player1_total)
+            self.winner_message = f"Player 1 {self.player1username} wins with {player1_total} points!"
+            self.save_winner(self.player1username, player1_total)
             self.game_over = True
         elif player2_total > player1_total:
-            self.winner_message = f"Player 2 wins with {player2_total} points!"
-            self.save_winner("Player 2", player2_total)
+            self.winner_message = f"Player 2 {self.player2username} wins with {player2_total} points!"
+            self.save_winner(self.player2username, player2_total)
             self.game_over = True
         else:
             self.winner_message = "It's a tie! Starting tiebreaker round..."

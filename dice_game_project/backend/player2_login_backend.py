@@ -36,7 +36,7 @@ class Player2LoginState(ParentStateClass):
             # Below line is very very important, as here we set the Username of Parent State Class. 
             self.player2username = self.username
             # And once the user and password is correct we redirect to HomePage
-            return rx.redirect("/homepage")
+            return rx.redirect("/game_page")
         else:
             self.message = "Invalid username or password"
             self.login_success = False
