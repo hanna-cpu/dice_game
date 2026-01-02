@@ -12,7 +12,7 @@ class GameState(ParentStateClass):
     # Game state variables
     message: str = ""
     current_player: int = 1
-    current_player_name: str = "luna"
+    current_player_name: str = current_player
     round_number: int = 1
     dice1: int = 0
     dice2: int = 0
@@ -37,7 +37,7 @@ class GameState(ParentStateClass):
     def roll_dice(self):
         """Handle dice rolling logic"""
 
-        if self.current_player_name == "luna":
+        if self.current_player_name == "":
             self.current_player_name = self.player1username
        
 
@@ -101,7 +101,7 @@ class GameState(ParentStateClass):
                     self.check_winner()
             else:
                 self.check_tiebreaker()
-    
+    # Check for winner after 5 rounds
     def check_winner(self):
         """Check who won after 5 rounds"""
         player1_total = sum(self.player1_scores)
@@ -119,7 +119,7 @@ class GameState(ParentStateClass):
             self.winner_message = "It's a tie! Starting tiebreaker round..."
             self.is_tiebreaker = True
             self.current_player = 1
-    
+    # Check tiebreaker result
     def check_tiebreaker(self):
         """Check tiebreaker result"""
         player1_total = sum(self.player1_scores)
@@ -136,7 +136,7 @@ class GameState(ParentStateClass):
         else:
             self.winner_message = "Still tied! Roll again..."
             self.current_player = 1
-    
+    # Save winner to external file
     def save_winner(self, name: str, score: int):
         """Save winner to external file"""
         try:
@@ -144,7 +144,7 @@ class GameState(ParentStateClass):
                 f.write(f"Winner: {name}, Score: {score}\n")
         except Exception as e:
             print(f"Error saving winner: {e}")
-    
+    #Reset game state for a new game
     def reset_game(self):
         """Reset game to initial state"""
         self.current_player = 1

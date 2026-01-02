@@ -3,9 +3,6 @@ import sqlite3
 
 from dice_game_project.backend.parent_state import ParentStateClass
 
-#Backend state for viewing game results
-#Loads results from an external file and displays it 
-
 class ViewResultsState(ParentStateClass):
     results: list[dict[str, str]] = []
     
@@ -15,7 +12,7 @@ class ViewResultsState(ParentStateClass):
             with open("winner.txt", "r") as f:
                 lines = f.readlines()
             
-            self.results = []
+            results_list = []
             for line in lines:
                 line = line.strip()
                 if line:
@@ -24,9 +21,15 @@ class ViewResultsState(ParentStateClass):
                     if len(parts) == 2:
                         winner = parts[0].replace("Winner: ", "").strip()
                         score = parts[1].replace("Score: ", "").strip()
-                        self.results.append({
+                        results_list.append({
                             "winner": winner,
-                            "score": score
+                            "score": score,
+                            "score_int": int(score)
                         })
+            
+            # Sort by score (descending) and get top 5
+            results_list.sort(key=lambda x: x["score_int"], reverse=True)
+            self.results = results_list[:5]
+            
         except Exception as e:
             self.results = [{"winner": "Error", "score": str(e)}]

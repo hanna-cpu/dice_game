@@ -51,13 +51,13 @@ def game_page() -> rx.Component:
                         rx.table.cell("Total", weight="bold"),
                         rx.table.cell(
                             rx.text(
-                                GameState.player1_total.to_string(),
+                               GameState.player1_total.to_string(),
                                 weight="bold"
                             )
                         ),
                         rx.table.cell(
                             rx.text(
-                                GameState.player2_total.to_string(),
+                              GameState.player2_total.to_string(),
                                 weight="bold"
                             )
                         ),
